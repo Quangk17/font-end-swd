@@ -1,0 +1,57 @@
+
+.login-container {
+    position: relative;
+    z-index: 2; 
+    margin-top: -150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-box {
+    width: 300px;
+    margin-top: 50px; 
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .login-box h2 {
+    margin-bottom: 20px;
+  }
+  
+  .login-box input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .login-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px; 
+  }
+  
+  .login-box button:hover {
+    background-color: #0056b3;
+  }
+  
+  .forgot-password {
+    font-size: 12px; 
+    text-align: left;
+  }
+  
+  .no-account {
+    font-size: 12px; 
+  }
+  
