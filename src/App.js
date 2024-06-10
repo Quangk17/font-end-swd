@@ -21,27 +21,29 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <header>
-          <Nav />
-          <Banner />
-        </header>
 
-        <Routes>
+        <Routes>     
           <Route path="/login" element={<Login />} /> 
           <Route path="/signup" element={<Signup />} /> 
-          <Route path="/" element={
+          <Route path="/" element={ 
             <>
+            <header>
+              <Nav />
+              <Banner />
+            </header>
+
               <Search onSearch={handleSearch} />
               {searchResults.length > 0 ? (
                 <SearchResults results={searchResults} />
               ) : (
                 <RecommendCourt />
               )}
+            <Footer />
             </>
           } />
         </Routes>
 
-        <Footer />
+       
       </div>
     </Router>
   );
