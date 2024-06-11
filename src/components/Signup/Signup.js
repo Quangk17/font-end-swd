@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { Helmet } from 'react-helmet';
 import './Signup.css';
 
 const Signup = ({ onSignup }) => {
@@ -32,6 +33,9 @@ const Signup = ({ onSignup }) => {
 
   return (
     <div className="signup-container">
+      <Helmet>
+        <title>ShuttleX - Đăng ký</title>
+      </Helmet>
       <div className="banner">
         <button className="home-button" onClick={() => window.location.href = '/'}>
           <FontAwesomeIcon icon={faHome} />

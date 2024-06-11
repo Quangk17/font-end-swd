@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { Helmet } from 'react-helmet';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -15,6 +16,9 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="login-container">
+      <Helmet>
+        <title>ShuttleX - Đăng nhập</title>
+      </Helmet>
       <div className="banner">
         <button className="home-button" onClick={() => window.location.href = '/'}>
           <FontAwesomeIcon icon={faHome} />
