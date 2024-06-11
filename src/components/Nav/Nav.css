@@ -8,7 +8,7 @@ nav {
   z-index: 1000;
   display: flex;
   justify-content: space-between;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.2s, color 0s;
   border: none;
   box-shadow: none;
 }
@@ -87,6 +87,10 @@ nav ul.center li a::after {
 
 nav ul.center li a:hover::after {
   width: 100%;
+}
+
+nav ul.right li {
+  margin: 0 5px;
 }
 
 nav ul.right li.signup a {
