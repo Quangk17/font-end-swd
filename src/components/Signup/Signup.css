@@ -14,28 +14,27 @@
   color: white;
 }
 
-.home-button {
+.logo {
   position: absolute;
   top: 20px;
   left: 20px;
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  color: white;
-  border: 2px solid white;
-  border-radius: 5px;
+  width: 280px;
   display: flex;
+  background-color: transparent;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
 
-.home-button i {
-  font-size: 20px;
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.home-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+
+.logo:hover {
+  background-color: transparent;
 }
 
 .banner h2 {
@@ -55,7 +54,11 @@
 }
 
 .signup-box h2 {
+  margin-top: 20px;
   margin-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 550;
+  font-size: 1.8rem;
 }
 
 .signup-box form {
@@ -65,14 +68,26 @@
   width: 100%;
 }
 
+.signup-box label {
+  width: 80%;
+  max-width: 300px;
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 550;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
 .signup-box input {
   width: 80%;
   max-width: 300px;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 12px;
   border-radius: 5px;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
 }
 
 .signup-box input.error {
@@ -81,8 +96,8 @@
 
 .signup-box .error-text {
   color: red;
-  font-size: 12px;
-  margin-top: -8px;
+  font-size: 1rem;
+  margin-top: -10px;
   margin-bottom: 10px;
   text-align: left;
   width: 80%;
@@ -92,19 +107,38 @@
 .signup-box button {
   width: 80%;
   max-width: 300px;
-  padding: 10px;
-  background-color: #007bff;
+  padding: 12px;
+  background-color: rgb(15, 188, 104);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 550;
+  font-size: 1rem;
 }
 
 .signup-box button:hover {
-  background-color: #0056b3;
+  background-color: rgb(12, 162, 89);
 }
 
 .had-account {
-  font-size: 12px;
+  color: #777777;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.had-account a {
+  color: rgb(15, 188, 104);
+  font-family: "Kanit", sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.had-account a:hover {
+  text-decoration: underline;
 }

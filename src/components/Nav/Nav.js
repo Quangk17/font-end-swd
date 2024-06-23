@@ -25,7 +25,7 @@ const Nav = () => {
   return (
     <nav className={scrolled ? 'scrolled' : ''}>
       <ul className="left">
-        {/* Thay đổi từ 'Trang chủ' thành logo */}
+        {}
         <li><Link to="/"><img src={scrolled ? LogoBlack : LogoWhite} alt="Logo" /></Link></li>
       </ul>
       <ul className="center">
