@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import LogoWhite from "../../assets/images/Logo-white.png";
 import "./Signup.css";
+import axios from "axios";
 
 const Signup = ({ onSignup }) => {
   const [username, setUsername] = useState("");
@@ -10,6 +11,7 @@ const Signup = ({ onSignup }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState("");
 
   const validateForm = () => {
     const newErrors = {};
@@ -24,11 +26,27 @@ const Signup = ({ onSignup }) => {
     return Object.keys(newErrors).length === 0 ? true : false;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Xử lý đăng ký
     if (validateForm()) {
-      onSignup({ username, password, fullName, phoneNumber });
+      try {
+        const response = await axios.post("https://localhost:7017/register", {
+          username,
+          password,
+          fullName,
+          phoneNumber,
+        });
+
+        // Xử lý phản hồi từ server, ví dụ: hiển thị thông báo thành công
+        console.log(response.data);
+        setMessage(
+          "Đăng ký thành công! Vui lòng kiểm tra email để xác nhận tài khoản."
+        );
+        onSignup(username); // Gọi callback onSignup khi đăng ký thành công
+      } catch (error) {
+        setErrors({ apiError: "Đăng ký không thành công. Vui lòng thử lại." });
+        console.error("Đăng ký không thành công:", error);
+      }
     }
   };
 
@@ -50,9 +68,10 @@ const Signup = ({ onSignup }) => {
       <div className="signup-box">
         <h2>Đăng ký</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Số điện thoại</label>
+          <label htmlFor="phoneNumber">Số điện thoại</label>
           <input
             type="text"
+            id="phoneNumber"
             placeholder="Số điện thoại"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
@@ -61,9 +80,10 @@ const Signup = ({ onSignup }) => {
           {errors.phoneNumber && (
             <p className="error-text">{errors.phoneNumber}</p>
           )}
-          <label htmlFor="username">Họ và Tên</label>
+          <label htmlFor="fullName">Họ và Tên</label>
           <input
             type="text"
+            id="fullName"
             placeholder="Họ và Tên"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
@@ -73,24 +93,27 @@ const Signup = ({ onSignup }) => {
           <label htmlFor="username">Tên đăng nhập</label>
           <input
             type="text"
+            id="username"
             placeholder="Tên đăng nhập"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className={errors.username ? "error" : ""}
           />
           {errors.username && <p className="error-text">{errors.username}</p>}
-          <label htmlFor="username">Mật khẩu</label>
+          <label htmlFor="password">Mật khẩu</label>
           <input
             type="password"
+            id="password"
             placeholder="Mật khẩu"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className={errors.password ? "error" : ""}
           />
           {errors.password && <p className="error-text">{errors.password}</p>}
-          <label htmlFor="username">Nhập lại mật khẩu</label>
+          <label htmlFor="confirmPassword">Nhập lại mật khẩu</label>
           <input
             type="password"
+            id="confirmPassword"
             placeholder="Nhập lại mật khẩu"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -99,6 +122,8 @@ const Signup = ({ onSignup }) => {
           {errors.confirmPassword && (
             <p className="error-text">{errors.confirmPassword}</p>
           )}
+          {errors.apiError && <p className="error-text">{errors.apiError}</p>}
+          {message && <p className="success-text">{message}</p>}
           <button type="submit" disabled={password !== confirmPassword}>
             Đăng ký
           </button>
