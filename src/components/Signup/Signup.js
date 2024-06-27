@@ -6,9 +6,11 @@ import axios from "axios";
 
 const Signup = ({ onSignup }) => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [gender, setGender] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
@@ -16,26 +18,32 @@ const Signup = ({ onSignup }) => {
   const validateForm = () => {
     const newErrors = {};
     if (!username) newErrors.username = "Tên đăng nhập không được để trống";
+    if (!email) newErrors.email = "Email không được để trống";
     if (!password) newErrors.password = "Mật khẩu không được để trống";
     if (password !== confirmPassword)
       newErrors.confirmPassword = "Mật khẩu không khớp";
     if (!fullName) newErrors.fullName = "Họ và Tên không được để trống";
     if (!phoneNumber)
       newErrors.phoneNumber = "Số điện thoại không được để trống";
+    if (!gender) newErrors.gender = "Giới tính không được để trống";
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0 ? true : false;
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await axios.post("https://localhost:7017/register", {
-          username,
-          password,
-          fullName,
-          phoneNumber,
-        });
+        const response = await axios.post(
+          "http://localhost:5236/api/Authentication/Register",
+          {
+            name: fullName,
+            email: email,
+            password: password,
+            phoneNumber: phoneNumber,
+            gender: gender,
+          }
+        );
 
         // Xử lý phản hồi từ server, ví dụ: hiển thị thông báo thành công
         console.log(response.data);
@@ -100,6 +108,29 @@ const Signup = ({ onSignup }) => {
             className={errors.username ? "error" : ""}
           />
           {errors.username && <p className="error-text">{errors.username}</p>}
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={errors.email ? "error" : ""}
+          />
+          {errors.email && <p className="error-text">{errors.email}</p>}
+          <label htmlFor="gender">Giới tính</label>
+          <select
+            id="gender"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            className={errors.gender ? "error" : ""}
+          >
+            <option value="">Chọn giới tính</option>
+            <option value="male">Nam</option>
+            <option value="female">Nữ</option>
+            <option value="other">Khác</option>
+          </select>
+          {errors.gender && <p className="error-text">{errors.gender}</p>}
           <label htmlFor="password">Mật khẩu</label>
           <input
             type="password"
