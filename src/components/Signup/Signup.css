@@ -32,7 +32,6 @@
   object-fit: contain;
 }
 
-
 .logo:hover {
   background-color: transparent;
 }
@@ -78,7 +77,8 @@
   font-size: 1rem;
 }
 
-.signup-box input {
+.signup-box input,
+.signup-box select {
   width: 80%;
   max-width: 300px;
   margin-bottom: 10px;
@@ -90,7 +90,8 @@
   font-size: 1rem;
 }
 
-.signup-box input.error {
+.signup-box input.error,
+.signup-box select.error {
   border-color: red;
 }
 

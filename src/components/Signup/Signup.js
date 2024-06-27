@@ -5,7 +5,6 @@ import "./Signup.css";
 import axios from "axios";
 
 const Signup = ({ onSignup }) => {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -17,7 +16,6 @@ const Signup = ({ onSignup }) => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!username) newErrors.username = "Tên đăng nhập không được để trống";
     if (!email) newErrors.email = "Email không được để trống";
     if (!password) newErrors.password = "Mật khẩu không được để trống";
     if (password !== confirmPassword)
@@ -50,7 +48,7 @@ const Signup = ({ onSignup }) => {
         setMessage(
           "Đăng ký thành công! Vui lòng kiểm tra email để xác nhận tài khoản."
         );
-        onSignup(username); // Gọi callback onSignup khi đăng ký thành công
+        onSignup(email); // Gọi callback onSignup khi đăng ký thành công
       } catch (error) {
         setErrors({ apiError: "Đăng ký không thành công. Vui lòng thử lại." });
         console.error("Đăng ký không thành công:", error);
@@ -76,6 +74,26 @@ const Signup = ({ onSignup }) => {
       <div className="signup-box">
         <h2>Đăng ký</h2>
         <form onSubmit={handleSubmit}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={errors.email ? "error" : ""}
+          />
+          {errors.email && <p className="error-text">{errors.email}</p>}
+          <label htmlFor="fullName">Họ và Tên</label>
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Họ và Tên"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            className={errors.fullName ? "error" : ""}
+          />
+          {errors.fullName && <p className="error-text">{errors.fullName}</p>}
           <label htmlFor="phoneNumber">Số điện thoại</label>
           <input
             type="text"
@@ -88,36 +106,6 @@ const Signup = ({ onSignup }) => {
           {errors.phoneNumber && (
             <p className="error-text">{errors.phoneNumber}</p>
           )}
-          <label htmlFor="fullName">Họ và Tên</label>
-          <input
-            type="text"
-            id="fullName"
-            placeholder="Họ và Tên"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className={errors.fullName ? "error" : ""}
-          />
-          {errors.fullName && <p className="error-text">{errors.fullName}</p>}
-          <label htmlFor="username">Tên đăng nhập</label>
-          <input
-            type="text"
-            id="username"
-            placeholder="Tên đăng nhập"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className={errors.username ? "error" : ""}
-          />
-          {errors.username && <p className="error-text">{errors.username}</p>}
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={errors.email ? "error" : ""}
-          />
-          {errors.email && <p className="error-text">{errors.email}</p>}
           <label htmlFor="gender">Giới tính</label>
           <select
             id="gender"
