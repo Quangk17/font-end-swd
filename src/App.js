@@ -8,6 +8,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import StoresPage from "./components/StoresPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -23,6 +24,18 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/stores"
+            element={
+              <>
+                <header>
+                  <Nav />
+                  {/* <Banner /> */}
+                </header>
+                <StoresPage />
+              </>
+            }
+          />
           <Route
             path="/"
             element={
