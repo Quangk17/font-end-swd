@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import StoresPage from "./components/StoresPage";
+import NewsPage from "./components/NewsPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -33,6 +34,18 @@ function App() {
                   {/* <Banner /> */}
                 </header>
                 <StoresPage />
+              </>
+            }
+          />
+          <Route
+            path="/news"
+            element={
+              <>
+                <header>
+                  <Nav />
+                  <Banner />
+                </header>
+                <NewsPage />
               </>
             }
           />
