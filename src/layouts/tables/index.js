@@ -14,6 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
+import { Button } from "antd";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
@@ -41,31 +42,7 @@ function Tables() {
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Authors Table
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
+            <Button>Add new</Button>
           </Grid>
           <Grid item xs={12}>
             <Card>
@@ -80,7 +57,37 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Projects Table
+                  Account Manage
+                </MDTypography>
+              </MDBox>
+              <MDBox pt={3}>
+                <DataTable
+                  table={{ columns, rows }}
+                  isSorted={false}
+                  entriesPerPage={false}
+                  showTotalEntries={false}
+                  noEndBorder
+                />
+              </MDBox>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Button>Add new</Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Card>
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
+                <MDTypography variant="h6" color="white">
+                  Court Manage
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

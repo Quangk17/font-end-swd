@@ -133,7 +133,7 @@
   - DashboardNavbar
   - DefaultNavbar
 - Sidenav
-- Tables
+- Dashboard
   - DataTable
 - Timeline
   - TimelineList
