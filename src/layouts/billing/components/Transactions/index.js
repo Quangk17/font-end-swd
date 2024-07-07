@@ -59,18 +59,11 @@ function Transactions() {
           sx={{ listStyle: "none" }}
         >
           <Transaction
-            color="error"
-            icon="expand_more"
-            name="Netflix"
-            description="27 March 2020, at 12:30 PM"
-            value="- $ 2,500"
-          />
-          <Transaction
             color="success"
             icon="expand_less"
-            name="Apple"
-            description="27 March 2020, at 04:30 AM"
-            value="+ $ 2,000"
+            name="Court 1"
+            description="27 March 2020, at 12:30 PM"
+            value="+ 100.000 VNĐ"
           />
         </MDBox>
         <MDBox mt={1} mb={2}>
@@ -89,30 +82,9 @@ function Transactions() {
           <Transaction
             color="success"
             icon="expand_less"
-            name="Stripe"
+            name="Court 2"
             description="26 March 2020, at 13:45 PM"
-            value="+ $ 750"
-          />
-          <Transaction
-            color="success"
-            icon="expand_less"
-            name="HubSpot"
-            description="26 March 2020, at 12:30 PM"
-            value="+ $ 1,000"
-          />
-          <Transaction
-            color="success"
-            icon="expand_less"
-            name="Creative Tim"
-            description="26 March 2020, at 08:30 AM"
-            value="+ $ 2,500"
-          />
-          <Transaction
-            color="dark"
-            icon="priority_high"
-            name="Webflow"
-            description="26 March 2020, at 05:00 AM"
-            value="Pending"
+            value="+ 200.000 VNĐ"
           />
         </MDBox>
       </MDBox>
