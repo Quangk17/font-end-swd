@@ -22,7 +22,9 @@ const Login = ({ onLogin }) => {
       );
 
       let response = await loginAPI("quangbui300323@gmail.com", "string");
-
+      if (response && response.token) {
+        localStorage.setItem("token", response.token);
+      }
       console.log(">>> check login: ", response);
 
       // const response = (email, password) => {
