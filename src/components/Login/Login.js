@@ -9,8 +9,8 @@ const Login = ({ onLogin }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    // e.preventDefault();
 
     try {
       const loginAPI = await axios.post(
@@ -21,7 +21,7 @@ const Login = ({ onLogin }) => {
         }
       );
 
-      let response = await loginAPI("quangbui300323@gmail.com", "string");
+      let response = await loginAPI(email, password);
       if (response && response.token) {
         localStorage.setItem("token", response.token);
       }
@@ -84,7 +84,9 @@ const Login = ({ onLogin }) => {
             <a href="/forgotpass">Quên mật khẩu?</a>
           </div>
           {error && <p className="error-message">{error}</p>}
-          <button type="submit">Đăng nhập</button>
+          <button type="submit" onClick={() => handleSubmit()}>
+            Đăng nhập
+          </button>
         </form>
         <div className="no-account">
           <p>
