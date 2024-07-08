@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import StoresPage from "./components/StoresPage";
 import NewsPage from "./components/NewsPage";
+import FAQs from "./components/Booking";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -29,11 +30,8 @@ function App() {
             path="/stores"
             element={
               <>
-                <header>
-                  <Nav />
-                  {/* <Banner /> */}
-                </header>
                 <StoresPage />
+                <Footer />
               </>
             }
           />
@@ -46,6 +44,20 @@ function App() {
                   <Banner />
                 </header>
                 <NewsPage />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/booking"
+            element={
+              <>
+                <header>
+                  <Nav />
+                  <Banner />
+                </header>
+                <FAQs />
+                <Footer />
               </>
             }
           />

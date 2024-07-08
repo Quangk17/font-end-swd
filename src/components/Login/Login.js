@@ -13,7 +13,7 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
+      const loginAPI = await axios.post(
         "http://localhost:5236/api/Authentication/Login",
         {
           email,
@@ -21,11 +21,21 @@ const Login = ({ onLogin }) => {
         }
       );
 
-      console.log(response.data);
-      // Lưu token vào local storage hoặc context của ứng dụng
-      localStorage.setItem("token", response.data.token);
+      let response = await loginAPI("quangbui300323@gmail.com", "string");
 
-      onLogin(email); // Gọi callback onLogin khi đăng nhập thành công
+      console.log(">>> check login: ", response);
+
+      // const response = (email, password) => {
+      //   return axios.post("http://localhost:5236/api/Authentication/Login", {
+      //     email,
+      //     password,
+      //   });
+      // };
+
+      // console.log(response.data);
+      // localStorage.setItem("token", response.data.token);
+
+      onLogin(email);
     } catch (error) {
       setError(
         "Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin đăng nhập."
