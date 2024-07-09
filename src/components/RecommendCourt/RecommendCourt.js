@@ -10,19 +10,19 @@ function RecommendCourt() {
       name: "ShuttleX Quận 1",
       address: "123 Đường ABC, Quận 1, TP. HCM",
       image: court1Image,
-      hours: "6:00 AM - 10:00 PM",
+      hours: "7:00 AM - 10:00 PM",
     },
     {
       name: "ShuttleX Quận 2",
       address: "456 Đường XYZ, Quận 2, TP. HCM",
       image: court2Image,
-      hours: "6:00 AM - 10:00 PM",
+      hours: "7:00 AM - 10:00 PM",
     },
     {
       name: "ShutlteX 3",
       address: "789 Đường LMN, Quận 3, TP. HCM",
       image: court3Image,
-      hours: "6:00 AM - 10:00 PM",
+      hours: "7:00 AM - 10:00 PM",
     },
   ];
 
@@ -70,7 +70,7 @@ function RecommendCourt() {
               <div className="recommend-info">
                 <h3>{court.name}</h3>
                 <p>{court.address}</p>
-                <p>Giờ: {court.hours}</p>
+                <p>{court.hours}</p>
               </div>
             </div>
           ))}

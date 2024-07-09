@@ -25,6 +25,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .store-image {
@@ -36,7 +37,10 @@
 }
 
 .store-info {
+    width: 100%;
     padding: 10px;
+    text-align: center;
+    margin: 0;
 }
 
 .store-info h3 {

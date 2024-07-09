@@ -3,7 +3,7 @@ import "./Login.css";
 import { Helmet } from "react-helmet";
 import LogoWhite from "../../assets/images/Logo-white.png";
 import axios from "axios";
-// import { toast } from "react-toastify";
+import { toastr } from "toastr";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -13,6 +13,9 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async () => {
     // e.preventDefault();
     alert("Login successfully");
+    if (!email || !password) {
+      toastr.error("Email và Mật khẩu là bắt buộc!", "Gặp lỗi!");
+    }
 
     // try {
     const loginAPI = (email, password) => {

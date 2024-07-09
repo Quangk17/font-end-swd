@@ -8,9 +8,10 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import StoresPage from "./components/StoresPage";
+import Stores from "./components/Stores";
 import NewsPage from "./components/NewsPage";
-import FAQs from "./components/Booking";
+import Booking from "./components/Booking";
+import StoreDetail from "./components/StoreDetail";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -30,7 +31,11 @@ function App() {
             path="/stores"
             element={
               <>
-                <StoresPage />
+                <header>
+                  <Nav />
+                  <Banner />
+                </header>
+                <Stores />
                 <Footer />
               </>
             }
@@ -56,7 +61,20 @@ function App() {
                   <Nav />
                   <Banner />
                 </header>
-                <FAQs />
+                <Booking />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/storedetail/:id"
+            element={
+              <>
+                <header>
+                  <Nav />
+                  <Banner />
+                </header>
+                <StoreDetail />
                 <Footer />
               </>
             }
@@ -69,7 +87,6 @@ function App() {
                   <Nav />
                   <Banner />
                 </header>
-
                 <Search onSearch={handleSearch} />
                 {searchResults.length > 0 ? (
                   <SearchResults results={searchResults} />
