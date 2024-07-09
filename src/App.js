@@ -10,8 +10,9 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Stores from "./components/Stores";
 import NewsPage from "./components/NewsPage";
-import Booking from "./components/Booking";
 import StoreDetail from "./components/StoreDetail";
+import BookingPage from "./components/BookingPage";
+// import TotalHoursBooking from "./components/TotalHoursBooking";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -54,14 +55,14 @@ function App() {
             }
           />
           <Route
-            path="/booking"
+            path="/booking/*"
             element={
               <>
                 <header>
                   <Nav />
                   <Banner />
                 </header>
-                <Booking />
+                <BookingPage />
                 <Footer />
               </>
             }
@@ -79,6 +80,32 @@ function App() {
               </>
             }
           />
+          <Route
+            path="/booking/*"
+            element={
+              <>
+                <header>
+                  <Nav />
+                  <Banner />
+                </header>
+                <BookingPage />
+                <Footer />
+              </>
+            }
+          />
+          {/* <Route
+            path="/booking/total-hours"
+            element={
+              <>
+                <header>
+                  <Nav />
+                  <Banner />
+                </header>
+                <TotalHoursBooking />
+                <Footer />
+              </>
+            }
+          /> */}
           <Route
             path="/"
             element={
