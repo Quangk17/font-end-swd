@@ -21,6 +21,7 @@
   width: 280px;
   display: flex;
   background-color: transparent;
+  border-radius: 5px;
   justify-content: center;
   align-items: center;
   cursor: pointer;

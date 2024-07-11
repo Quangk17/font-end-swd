@@ -62,9 +62,11 @@ const ChooseStore = ({ onSelectCourt }) => {
               onClick={() => onSelectCourt(court)}
             >
               <img src={court.imageUrl} alt={court.name} />
-              <h3>{court.name}</h3>
-              <p>{court.address}</p>
-              <p>{court.hours}</p>
+              <div className="store-info">
+                <h3>{court.name}</h3>
+                <p>{court.address}</p>
+                <p>{court.hours}</p>
+              </div>
             </Link>
           </div>
         ))}

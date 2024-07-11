@@ -12,7 +12,7 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async () => {
     // e.preventDefault();
-    alert("Login successfully");
+
     if (!email || !password) {
       toastr.error("Email và Mật khẩu là bắt buộc!", "Gặp lỗi!");
     }
@@ -30,6 +30,7 @@ const Login = ({ onLogin }) => {
       localStorage.setItem("token", response.token);
     }
     console.log(">>> check login: ", response);
+    alert("Login successfully");
 
     // const response = (email, password) => {
     //   return axios.post("http://localhost:5236/api/Authentication/Login", {
@@ -58,11 +59,7 @@ const Login = ({ onLogin }) => {
       </Helmet>
       <div className="banner">
         <button className="logo" onClick={() => (window.location.href = "/")}>
-          <img
-            src={LogoWhite}
-            alt="LogoWhite"
-            style={{ width: "100%", height: "100%" }}
-          />
+          <img src={LogoWhite} alt="LogoWhite" />
         </button>
         <h2> </h2>
       </div>

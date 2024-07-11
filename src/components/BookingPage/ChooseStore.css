@@ -54,3 +54,8 @@
 .store-card a:hover {
     text-decoration: none;
 }
+
+.store-info {
+    font-weight: normal;
+    margin-bottom: 5px;
+}
