@@ -1,42 +1,42 @@
-import React, { useState } from 'react';
-import './Search.css';
-import court1Image from '../../assets/images/court1.webp';
-import court2Image from '../../assets/images/court2.jpg';
+import React, { useState } from "react";
+import "./Search.css";
+import court1Image from "../../assets/images/court1.webp";
+import court2Image from "../../assets/images/court2.jpg";
 
 function Search({ onSearch }) {
-  const [location, setLocation] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [error, setError] = useState('');
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (!location) {
-      setError('Vui lòng chọn khu vực.');
+      setError("Vui lòng chọn khu vực.");
       return;
     }
 
-    setError('');
+    setError("");
     const searchResults = [
       {
-        court: 'Chi Nhánh 1',
-        address: 'Quận 1',
+        court: "Chi Nhánh 1",
+        address: "Quận 1",
         location,
         date,
         time,
         image: court1Image,
-        hours: '6:00 AM - 10:00 PM'
+        hours: "6:00 AM - 10:00 PM",
       },
       {
-        court: 'Chi Nhánh 2',
-        address: 'Quận 2',
+        court: "Chi Nhánh 2",
+        address: "Quận 2",
         location,
         date,
         time,
         image: court2Image,
-        hours: '6:00 AM - 10:00 PM'
-      }
+        hours: "6:00 AM - 10:00 PM",
+      },
     ];
 
     onSearch(searchResults);
@@ -62,10 +62,12 @@ function Search({ onSearch }) {
               <option value="District 1">Quận 1</option>
               <option value="District 2">Quận 2</option>
               <option value="District 3">Quận 3</option>
-              <option value="District 4">Quận 4</option>
+              <option value="District 4">Quận 10</option>
+              <option value="District GV">Quận Gò Vấp</option>
+              <option value="District BT">Quận Bình Thạnh</option>
             </select>
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="date">Ngày:</label>
             <input
               type="date"
@@ -84,7 +86,7 @@ function Search({ onSearch }) {
               value={time}
               onChange={(e) => setTime(e.target.value)}
             />
-          </div>
+          </div> */}
           <button type="submit">Tìm kiếm</button>
         </form>
         {error && <p className="error-message">{error}</p>}
