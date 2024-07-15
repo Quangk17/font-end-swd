@@ -2,55 +2,60 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Helmet } from "react-helmet";
 import LogoWhite from "../../assets/images/Logo-white.png";
-import axios from "axios";
-import { toastr } from "toastr";
+import toastr from "toastr";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    //     if (!email || !password) {
+    //       toastr.error("Email và Mật khẩu là bắt buộc!", "Gặp lỗi!");
+    //       return;
+    //     }
+
+    //     try {
+    //       const loginAPI = (email, password) => {
+    //         return axios.post("http://localhost:5236/api/Authentication/Login", {
+    //           email,
+    //           password,
+    //         });
+    //       };
+
+    //       let response = await loginAPI(email, password);
+    //       if (response && response.data && response.data.token) {
+    //         localStorage.setItem("token", response.data.token);
+    //         console.log(">>> check login: ", response);
+    //         alert("Login successfully");
+    //         navigate("/");
+    //       } else {
+    //         toastr.error("Đăng nhập không thành công!", "Gặp lỗi!");
+    //       }
+    //     } catch (error) {
+    //       toastr.error("Đăng nhập không thành công!", "Gặp lỗi!");
+    //       console.error("Đăng nhập không thành công:", error);
+    //     }
+    //   };
 
     if (!email || !password) {
       toastr.error("Email và Mật khẩu là bắt buộc!", "Gặp lỗi!");
+      return;
     }
 
-    // try {
-    const loginAPI = (email, password) => {
-      return axios.post("http://localhost:5236/api/Authentication/Login", {
-        email,
-        password,
-      });
-    };
-
-    let response = await loginAPI(email, password);
-    if (response && response.token) {
-      localStorage.setItem("token", response.token);
+    if (email === "quangbui300323@gmail.com" && password === "string") {
+      localStorage.setItem("token", "fake-token");
+      // alert("Login successfully");
+      onLogin();
+      navigate("/");
+    } else {
+      toastr.error("Đăng nhập không thành công!", "Gặp lỗi!");
     }
-    console.log(">>> check login: ", response);
-    alert("Login successfully");
-
-    // const response = (email, password) => {
-    //   return axios.post("http://localhost:5236/api/Authentication/Login", {
-    //     email,
-    //     password,
-    //   });
-    // };
-
-    // console.log(response.data);
-    // localStorage.setItem("token", response.data.token);
-
-    // onLogin(email);
   };
-  //   catch (error) {
-  //     setError(
-  //       "Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin đăng nhập."
-  //     );
-  //     console.error("Đăng nhập không thành công:", error);
-  //   }
-  // };
 
   return (
     <div className="login-container">
@@ -85,10 +90,7 @@ const Login = ({ onLogin }) => {
           <div className="forgot-password">
             <a href="/forgotpass">Quên mật khẩu?</a>
           </div>
-          {/* {error && <p className="error-message">{error}</p>} */}
-          <button type="submit" onClick={() => handleSubmit()}>
-            Đăng nhập
-          </button>
+          <button type="submit">Đăng nhập</button>
         </form>
         <div className="no-account">
           <p>

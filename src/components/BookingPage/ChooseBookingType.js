@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import "./ChooseBookingType.css";
 
 const ChooseBookingType = ({ onSelectMode }) => {
+  // const navigate = useNavigate();
+
   const handleSelectMode = (mode) => {
     if (typeof onSelectMode === "function") {
       onSelectMode(mode);

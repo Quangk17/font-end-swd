@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import "./Nav.css";
 import LogoWhite from "../../assets/images/Logo-white.png";
 import LogoBlack from "../../assets/images/Logo-black.png";
 
-const Nav = () => {
+const Nav = ({ isLoggedIn, onLogout }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -22,10 +24,25 @@ const Nav = () => {
     };
   }, []);
 
+  const handleLogoutClick = () => {
+    confirmAlert({
+      title: "Xác nhận",
+      message: "Bạn muốn đăng xuất?",
+      buttons: [
+        {
+          label: "Đăng xuất",
+          onClick: () => onLogout(),
+        },
+        {
+          label: "Quay lại",
+        },
+      ],
+    });
+  };
+
   return (
     <nav className={scrolled ? "scrolled" : ""}>
       <ul className="left">
-        {}
         <li>
           <Link to="/">
             <img src={scrolled ? LogoBlack : LogoWhite} alt="Logo" />
@@ -44,12 +61,20 @@ const Nav = () => {
         </li>
       </ul>
       <ul className="right">
-        <li>
-          <Link to="/login">Đăng nhập</Link>
-        </li>
-        <li className="signup">
-          <Link to="/signup">Đăng ký</Link>
-        </li>
+        {isLoggedIn ? (
+          <li className="logout">
+            <button onClick={handleLogoutClick}>Đăng xuất</button>
+          </li>
+        ) : (
+          <>
+            <li className="login">
+              <Link to="/login">Đăng nhập</Link>
+            </li>
+            <li className="signup">
+              <Link to="/signup">Đăng ký</Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );
