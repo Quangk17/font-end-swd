@@ -50,38 +50,38 @@
   padding: 20px;
   background-color: #ffffff;
   text-align: center;
+  width: 80%;
 }
 
 .signup-box h2 {
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   font-family: "Montserrat", sans-serif;
   font-weight: 550;
   font-size: 1.8rem;
-}
-
-.signup-box form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
   width: 100%;
 }
 
-.signup-box label {
+.signup-box form {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-gap: 10px;
   width: 80%;
-  max-width: 300px;
-  text-align: left;
+}
+
+.signup-box label {
+  text-align: right;
+  padding-right: 10px;
   font-family: "Montserrat", sans-serif;
   font-weight: 550;
-  margin-bottom: 10px;
   font-size: 1rem;
+  align-self: center;
 }
 
 .signup-box input,
 .signup-box select {
-  width: 80%;
-  max-width: 300px;
-  margin-bottom: 10px;
+  width: 100%;
   padding: 12px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -101,20 +101,17 @@
   margin-top: -10px;
   margin-bottom: 10px;
   text-align: left;
-  width: 80%;
-  max-width: 300px;
 }
 
 .signup-box button {
-  width: 80%;
-  max-width: 300px;
+  grid-column: span 2;
   padding: 12px;
   background-color: rgb(15, 188, 104);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-top: 20px;
   font-family: "Montserrat", sans-serif;
   font-weight: 550;
   font-size: 1rem;
@@ -128,9 +125,7 @@
   color: #777777;
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
+  margin-top: 20px;
 }
 
 .had-account a {
@@ -142,4 +137,51 @@
 
 .had-account a:hover {
   text-decoration: underline;
+}
+
+.custom-success-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.custom-success {
+  max-width: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-success-message {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.custom-success-button {
+  font-size: 14px;
+  padding: 8px 16px;
+  margin: 0 10px;
+  cursor: pointer;
+  background-color: rgb(15, 188, 104);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.custom-success-button:hover {
+  background-color: rgb(13, 163, 90);
 }

@@ -29,6 +29,11 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  const handleSignup = (email) => {
+    setIsLoggedIn(true);
+    localStorage.setItem("userEmail", email);
+  };
+
   return (
     <Router>
       <div className="App">
@@ -37,7 +42,7 @@ function App() {
             path="/login"
             element={<Login onLogin={() => setIsLoggedIn(true)} />}
           />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
           <Route
             path="/stores"
             element={
