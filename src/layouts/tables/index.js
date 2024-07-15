@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-
+/* eslint-disable */
 // @mui material components
 import { Button } from "antd";
 import Grid from "@mui/material/Grid";
@@ -31,21 +31,44 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
-
+import AddNewUser from "./compoments/AddNewUser";
+import AddNewCourt from "./compoments/AddNewCourt";
 import { useState } from "react";
+import UpdateCourt from "./data/UpdateCourt";
 
 function Tables() {
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
+  const [showAddUserForm, setShowAddUserForm] = useState(false);
+  const [showAddCourtForm, setShowAddCourtForm] = useState(false);
+  const [showUpateCourtForm, setShowUpdateCourtForm] = useState(false);
+  const [updatingCourt, setUpdatingCourt] = useState()
+
+  const toggleFormUserVisibility = () => {
+    setShowAddUserForm(!showAddUserForm);
+  };
+
+  const toggleFormCourtVisibility = () => {
+    setShowAddCourtForm(!showAddCourtForm);
+  };
+
+  const toggleFormUpateCourtVisibility = () => {
+    setShowUpdateCourtForm(!showUpateCourtForm);
+  };
+
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
+
         <Grid container spacing={6}>
           <Grid item xs={12}>
-            <Button>Add new</Button>
+            <Button onClick={toggleFormUserVisibility} >Add new</Button>
           </Grid>
+          {showAddUserForm ? <AddNewUser /> : <form />}
+
           <Grid item xs={12}>
             <Card>
               <MDBox
@@ -73,9 +96,12 @@ function Tables() {
               </MDBox>
             </Card>
           </Grid>
+
           <Grid item xs={12}>
-            <Button>Add new</Button>
+            <Button onClick={toggleFormCourtVisibility} >Add new</Button>
           </Grid>
+          {showAddCourtForm ? <AddNewCourt /> : <form />}
+          {showUpateCourtForm ? <UpdateCourt /> : <form />}
           <Grid item xs={12}>
             <Card>
               <MDBox

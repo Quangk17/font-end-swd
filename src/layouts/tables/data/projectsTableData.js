@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-
+/* eslint-disable */
 // @mui material components
 import Icon from "@mui/material/Icon";
 
@@ -32,7 +32,44 @@ import logoSlack from "assets/images/small-logos/logo-slack.svg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import logoInvesion from "assets/images/small-logos/logo-invision.svg";
 
+import { getCourts, getDeleteCourt, getUpdateCourt } from "network/network";
+import FormUpdateCourt from "../compoments/FormUpdateCourt";
+
+import { useEffect, useState } from "react";
+
 export default function data() {
+  const [courts, setCourts] = useState([]);
+
+
+  useEffect(() => {
+    getCourts()
+      .then((res) => {
+        console.log(res.data.data);
+        setCourts(res.data.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const DeleteCourt = (id) => {
+    getDeleteCourt(id)
+      .then(() => {
+        const updatedCourts = courts.filter(court => court.id !== id);
+        setCourts(updatedCourts);
+      })
+    console.log("delete", id)
+  }
+
+  const UpdateCourt = async (id) => {
+    try {
+      await getUpdateCourt(id);
+      const updatedCourts = courts.filter(court => court.id !== id);
+      setCourts(updatedCourts);
+      console.log("update", id);
+    } catch (error) {
+      console.error("Failed to update court:", error);
+    }
+  }
+
   const Project = ({ image, name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" variant="rounded" />
@@ -45,13 +82,37 @@ export default function data() {
   const Progress = ({ color, value }) => (
     <MDBox display="flex" alignItems="center">
       <MDTypography variant="caption" color="text" fontWeight="medium">
-        {value}%
+        {value}
       </MDTypography>
-      <MDBox ml={0.5} width="9rem">
-        <MDProgress variant="gradient" color={color} value={value} />
-      </MDBox>
     </MDBox>
   );
+
+  const rows = courts.map((court) => ({
+
+    project: <Project image={LogoAsana} name={court.name} />,
+    budget: (
+      <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+        $2,500
+      </MDTypography>
+    ),
+    status: (
+      <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium"  >
+        {court.status ? "FREE" : "OCCUPIED"}
+      </MDTypography>
+    ),
+    completion: <Progress color="info" value={1} />,
+    action: (
+      <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" onClick={() => UpdateCourt(court.id)}>
+        Update
+      </MDTypography>
+    ),
+    delete: (
+      <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" onClick={() => DeleteCourt(court.id)}>
+        Delete
+      </MDTypography>
+    ),
+
+  }));
 
   return {
     columns: [
@@ -63,31 +124,32 @@ export default function data() {
       { Header: "Delete", accessor: "delete", align: "center" },
     ],
 
-    rows: [
-      {
-        project: <Project image={LogoAsana} name="Asana" />,
-        budget: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $2,500
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
-          </MDTypography>
-        ),
-        completion: <Progress color="info" value={60} />,
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Update
-          </MDTypography>
-        ),
-        delete: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Delete
-          </MDTypography>
-        ),
-      },
-    ],
+    // rows: [
+    //   {
+    //     project: <Project image={LogoAsana} name="Asana" />,
+    //     budget: (
+    //       <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+    //         $2,500
+    //       </MDTypography>
+    //     ),
+    //     status: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         working
+    //       </MDTypography>
+    //     ),
+    //     completion: <Progress color="info" value={60} />,
+    //     action: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         Update
+    //       </MDTypography>
+    //     ),
+    //     delete: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         Delete
+    //       </MDTypography>
+    //     ),
+    //   },
+    // ],
+    rows: rows
   };
 }
