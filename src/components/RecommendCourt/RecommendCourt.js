@@ -18,11 +18,14 @@ function RecommendCourt() {
         const response = await axios.get(
           "http://localhost:5236/api/Store/ViewAllStore"
         );
-        const courts = response.data.data.slice(0, 3).map((court, index) => ({
-          ...court,
-          image: imageMap[index % imageMap.length],
-          hours: "7:00 AM - 10:00 PM",
-        }));
+        const courts = response.data.data
+          .filter((court) => !court.isDeleted)
+          .slice(0, 3)
+          .map((court, index) => ({
+            ...court,
+            image: imageMap[index % imageMap.length],
+            hours: "7:00 AM - 10:00 PM",
+          }));
         setRecommendedCourts(courts);
         setLoading(false);
       } catch (err) {
