@@ -14,51 +14,25 @@ const Stores = () => {
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const sampleStores = [
-          {
-            id: 1,
-            name: "ShuttleX Quận 1",
-            address: "123 Đường ABC, Quận 1, TP. HCM",
-            imageUrl: court1Image,
+        const response = await fetch(
+          "http://localhost:5236/api/Store/ViewAllStore"
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const result = await response.json();
+
+        const filteredStores = result.data
+          .filter((store) => !store.isDeleted)
+          .map((store, index) => ({
+            id: store.id,
+            name: store.name,
+            address: store.address,
             hours: "7:00 AM - 10:00 PM",
-          },
-          {
-            id: 2,
-            name: "ShuttleX Quận 2",
-            address: "456 Đường XYZ, Quận 2, TP. HCM",
-            imageUrl: court2Image,
-            hours: "7:00 AM - 10:00 PM",
-          },
-          {
-            id: 3,
-            name: "ShuttleX Quận 3",
-            address: "789 Đường LMN, Quận 3, TP. HCM",
-            imageUrl: court3Image,
-            hours: "7:00 AM - 10:00 PM",
-          },
-          {
-            id: 4,
-            name: "ShuttleX Quận Gò Vấp",
-            address: "123 Đường ABC, Quận Gò Vấp, TP. HCM",
-            imageUrl: court2Image,
-            hours: "7:00 AM - 10:00 PM",
-          },
-          {
-            id: 5,
-            name: "ShuttleX Quận 10",
-            address: "456 Đường XYZ, Quận 10, TP. HCM",
-            imageUrl: court3Image,
-            hours: "7:00 AM - 10:00 PM",
-          },
-          {
-            id: 6,
-            name: "ShuttleX Quận Bình Thạnh",
-            address: "789 Đường LMN, Quận Bình Thạnh, TP. HCM",
-            imageUrl: court1Image,
-            hours: "7:00 AM - 10:00 PM",
-          },
-        ];
-        setStores(sampleStores);
+            imageUrl: [court1Image, court2Image, court3Image][index % 3],
+          }));
+
+        setStores(filteredStores);
       } catch (error) {
         setError("Có lỗi xảy ra khi tải dữ liệu cửa hàng.");
       } finally {

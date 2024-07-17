@@ -6,7 +6,7 @@ import "./Nav.css";
 import LogoWhite from "../../assets/images/Logo-white.png";
 import LogoBlack from "../../assets/images/Logo-black.png";
 
-const Nav = ({ isLoggedIn, onLogout }) => {
+const Nav = ({ isLoggedIn, onLogout, resetSearch }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -40,11 +40,15 @@ const Nav = ({ isLoggedIn, onLogout }) => {
     });
   };
 
+  const handleLogoClick = () => {
+    resetSearch(); // Call the resetSearch function passed from App.js
+  };
+
   return (
     <nav className={scrolled ? "scrolled" : ""}>
       <ul className="left">
         <li>
-          <Link to="/">
+          <Link to="/" onClick={handleLogoClick}>
             <img src={scrolled ? LogoBlack : LogoWhite} alt="Logo" />
           </Link>
         </li>

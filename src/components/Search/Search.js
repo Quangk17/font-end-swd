@@ -1,15 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Search.css";
-import court1Image from "../../assets/images/court1.webp";
 import court2Image from "../../assets/images/court2.jpg";
 
 function Search({ onSearch }) {
   const [location, setLocation] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
   const [error, setError] = useState("");
+  const [districts, setDistricts] = useState([]);
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    fetchDistricts();
+  }, []);
+
+  const fetchDistricts = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5236/api/Store/ViewAllStore"
+      );
+      const filteredDistricts = response.data.data
+        .filter((item) => !item.isDeleted)
+        .map((item) => ({
+          value: item.name,
+          label: item.name.replace("ShuttleX ", ""),
+        }));
+      setDistricts(filteredDistricts);
+    } catch (error) {
+      console.error("Error fetching districts", error);
+      setError("Không tải được danh sách quận.");
+    }
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!location) {
@@ -18,28 +39,28 @@ function Search({ onSearch }) {
     }
 
     setError("");
-    const searchResults = [
-      {
-        court: "Chi Nhánh 1",
-        address: "Quận 1",
-        location,
-        date,
-        time,
-        image: court1Image,
-        hours: "6:00 AM - 10:00 PM",
-      },
-      {
-        court: "Chi Nhánh 2",
-        address: "Quận 2",
-        location,
-        date,
-        time,
+    try {
+      const response = await axios.get(
+        `http://localhost:5236/api/Store/SearchStoreByName?name=${encodeURIComponent(
+          location
+        )}`
+      );
+      const searchResults = response.data.data.map((item) => ({
+        court: item.name,
+        address: item.address,
+        status: item.status,
+        timeActive: item.timeActive,
         image: court2Image,
-        hours: "6:00 AM - 10:00 PM",
-      },
-    ];
+      }));
+      onSearch(searchResults);
+    } catch (error) {
+      console.error("Error fetching search results", error);
+      setError("Không tìm thấy sân.");
+    }
+  };
 
-    onSearch(searchResults);
+  const handleLocationChange = (e) => {
+    setLocation(e.target.value);
   };
 
   return (
@@ -54,39 +75,18 @@ function Search({ onSearch }) {
               name="location"
               required
               value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              onChange={handleLocationChange}
             >
               <option value="" disabled>
                 Chọn quận/huyện
               </option>
-              <option value="District 1">Quận 1</option>
-              <option value="District 2">Quận 2</option>
-              <option value="District 3">Quận 3</option>
-              <option value="District 4">Quận 10</option>
-              <option value="District GV">Quận Gò Vấp</option>
-              <option value="District BT">Quận Bình Thạnh</option>
+              {districts.map((district, index) => (
+                <option key={index} value={district.value}>
+                  {district.label}
+                </option>
+              ))}
             </select>
           </div>
-          {/* <div>
-            <label htmlFor="date">Ngày:</label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="time">Giờ:</label>
-            <input
-              type="time"
-              id="time"
-              name="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-            />
-          </div> */}
           <button type="submit">Tìm kiếm</button>
         </form>
         {error && <p className="error-message">{error}</p>}

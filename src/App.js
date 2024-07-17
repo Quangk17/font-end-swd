@@ -34,6 +34,10 @@ function App() {
     localStorage.setItem("userEmail", email);
   };
 
+  const resetSearch = () => {
+    setSearchResults([]); // Reset search results
+  };
+
   return (
     <Router>
       <div className="App">
@@ -48,7 +52,11 @@ function App() {
             element={
               <>
                 <header>
-                  <Nav isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+                  <Nav
+                    isLoggedIn={isLoggedIn}
+                    onLogout={handleLogout}
+                    resetSearch={resetSearch}
+                  />
                   <Banner />
                 </header>
                 <Stores />
@@ -61,7 +69,11 @@ function App() {
             element={
               <>
                 <header>
-                  <Nav isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+                  <Nav
+                    isLoggedIn={isLoggedIn}
+                    onLogout={handleLogout}
+                    resetSearch={resetSearch}
+                  />
                   <Banner />
                 </header>
                 <NewsPage />
@@ -74,7 +86,11 @@ function App() {
             element={
               <>
                 <header>
-                  <Nav isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+                  <Nav
+                    isLoggedIn={isLoggedIn}
+                    onLogout={handleLogout}
+                    resetSearch={resetSearch}
+                  />
                   <Banner />
                 </header>
                 <BookingPage />
@@ -87,7 +103,11 @@ function App() {
             element={
               <>
                 <header>
-                  <Nav isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+                  <Nav
+                    isLoggedIn={isLoggedIn}
+                    onLogout={handleLogout}
+                    resetSearch={resetSearch}
+                  />
                   <Banner />
                 </header>
                 <StoreDetail />
@@ -100,7 +120,11 @@ function App() {
             element={
               <>
                 <header>
-                  <Nav isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+                  <Nav
+                    isLoggedIn={isLoggedIn}
+                    onLogout={handleLogout}
+                    resetSearch={resetSearch}
+                  />
                   <Banner />
                 </header>
                 <Search onSearch={handleSearch} />
