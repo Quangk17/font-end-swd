@@ -4,56 +4,40 @@ import { Helmet } from "react-helmet";
 import LogoWhite from "../../assets/images/Logo-white.png";
 import toastr from "toastr";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    //     if (!email || !password) {
-    //       toastr.error("Email và Mật khẩu là bắt buộc!", "Gặp lỗi!");
-    //       return;
-    //     }
-
-    //     try {
-    //       const loginAPI = (email, password) => {
-    //         return axios.post("http://localhost:5236/api/Authentication/Login", {
-    //           email,
-    //           password,
-    //         });
-    //       };
-
-    //       let response = await loginAPI(email, password);
-    //       if (response && response.data && response.data.token) {
-    //         localStorage.setItem("token", response.data.token);
-    //         console.log(">>> check login: ", response);
-    //         alert("Login successfully");
-    //         navigate("/");
-    //       } else {
-    //         toastr.error("Đăng nhập không thành công!", "Gặp lỗi!");
-    //       }
-    //     } catch (error) {
-    //       toastr.error("Đăng nhập không thành công!", "Gặp lỗi!");
-    //       console.error("Đăng nhập không thành công:", error);
-    //     }
-    //   };
 
     if (!email || !password) {
       toastr.error("Email và Mật khẩu là bắt buộc!", "Gặp lỗi!");
       return;
     }
 
-    if (email === "quangbui300323@gmail.com" && password === "string") {
-      localStorage.setItem("token", "fake-token");
-      // alert("Login successfully");
-      onLogin();
-      navigate("/");
-    } else {
+    try {
+      const response = await axios.post(
+        "http://localhost:5236/api/Authentication/Login",
+        {
+          email,
+          password,
+        }
+      );
+
+      if (response.data.success && response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        onLogin();
+        navigate("/");
+      } else {
+        toastr.error("Đăng nhập không thành công!", "Gặp lỗi!");
+      }
+    } catch (error) {
       toastr.error("Đăng nhập không thành công!", "Gặp lỗi!");
+      console.error("Đăng nhập không thành công:", error);
     }
   };
 
