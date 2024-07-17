@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { searchUser } from 'network/network';
 
 const NavSearch = (props) => {
   const { windowWidth } = props;
