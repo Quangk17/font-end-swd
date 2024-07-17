@@ -1,57 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import "./StoreDetail.css";
-
-const sampleStores = [
-  {
-    id: 1,
-    name: "ShuttleX Quận 1",
-    address: "123 Đường ABC, Quận 1, TP. HCM",
-    hours: "7:00 AM - 10:00 PM",
-  },
-  {
-    id: 2,
-    name: "ShuttleX Quận 2",
-    address: "456 Đường XYZ, Quận 2, TP. HCM",
-    hours: "7:00 AM - 10:00 PM",
-  },
-  {
-    id: 3,
-    name: "ShuttleX Quận 3",
-    address: "789 Đường LMN, Quận 3, TP. HCM",
-    hours: "7:00 AM - 10:00 PM",
-  },
-  {
-    id: 4,
-    name: "ShuttleX Quận Gò Vấp",
-    address: "123 Đường ABC, Quận Gò Vấp, TP. HCM",
-    hours: "7:00 AM - 10:00 PM",
-  },
-  {
-    id: 5,
-    name: "ShuttleX Quận 10",
-    address: "456 Đường XYZ, Quận 10, TP. HCM",
-    hours: "7:00 AM - 10:00 PM",
-  },
-  {
-    id: 6,
-    name: "ShuttleX Quận Bình Thạnh",
-    address: "789 Đường LMN, Quận Bình Thạnh, TP. HCM",
-    hours: "7:00 AM - 10:00 PM",
-  },
-];
 
 const StoreDetail = () => {
   const { id } = useParams();
   const [store, setStore] = useState(null);
+  const [bookingData, setBookingData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storeData = sampleStores.find((store) => store.id === parseInt(id));
-    setStore(storeData);
+    const fetchStoreDetail = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5236/api/Store/ViewAllStore`
+        );
+        const stores = response.data.data;
+        const selectedStore = stores.find((s) => s.id === parseInt(id));
+        if (selectedStore) {
+          setStore(selectedStore);
+          // Example mock booking data
+          const mockBookingData = [
+            { day: "Thứ 2", time: "7:00-7:30", status: "booked" },
+            { day: "Thứ 5", time: "19:00-19:30", status: "booked" },
+          ]; // Replace with actual booking data from API
+          setBookingData(mockBookingData); // Set booking data from API response
+        } else {
+          console.error(`Không tìm thấy cửa hàng với id ${id}`);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error("Lỗi khi lấy thông tin cửa hàng:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchStoreDetail();
   }, [id]);
 
-  if (!store) {
+  if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (!store) {
+    return <div>Không tìm thấy thông tin cửa hàng</div>;
   }
 
   const timeSlots = [];
@@ -70,18 +62,13 @@ const StoreDetail = () => {
     "Chủ Nhật",
   ];
 
-  const bookingData = [
-    { day: "Thứ 2", time: "7:00-7:30", status: "booked" },
-    { day: "Thứ 5", time: "19:00-19:30", status: "booked" },
-  ];
-
   return (
     <div className="store-detail-container">
-      <div className="store-info-card">
+      <div className="store-info-sidebar">
         <div className="store-info">
           <h2>{store.name}</h2>
           <p>
-            <strong>Giờ hoạt động:</strong> {store.hours}
+            <strong>Giờ hoạt động:</strong> 7:00 AM - 10:00 PM
           </p>
           <p>
             <strong>Địa chỉ:</strong> {store.address}
@@ -94,7 +81,7 @@ const StoreDetail = () => {
           <table>
             <thead>
               <tr>
-                <th>Time</th>
+                <th>Thời gian</th>
                 {daysOfWeek.map((day) => (
                   <th key={day}>{day}</th>
                 ))}
@@ -114,11 +101,7 @@ const StoreDetail = () => {
                         key={day + slot}
                         className={isBooked ? "booked" : "available"}
                       >
-                        {!isBooked ? (
-                          <Link to={`/booking?day=${day}&time=${slot}`}></Link>
-                        ) : (
-                          " "
-                        )}
+                        {!isBooked ? "50.000VNĐ" : ""}
                       </td>
                     );
                   })}

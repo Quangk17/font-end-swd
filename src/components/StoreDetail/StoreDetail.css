@@ -1,29 +1,23 @@
 .store-detail-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     margin: 20px auto;
-    max-width: 1200px;
+    max-width: 1300px;
     width: 100%;
 }
 
-.store-info-card {
-    width: 30%;
-    margin-top: 30px;
-    margin-right: 5px;
-}
-
-.store-info-card p {
-    margin-top: 30px;
-    text-align: left;
-}
-
-.booking-info-card {
-    width: 70%;
+.store-info-sidebar {
+    width: 25%;
+    position: sticky;
+    top: 20px;
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+    margin-right: 20px;
 }
 
 .store-info {
@@ -38,6 +32,10 @@
 .store-info p {
     margin: 8px 0;
     line-height: 1.4;
+}
+
+.booking-info-card {
+    width: 75%;
 }
 
 .store-booking {
@@ -67,8 +65,4 @@
 .booked {
     background-color: #d4d4d4;
     pointer-events: none;
-}
-
-.available a:hover {
-    text-decoration: underline;
 }
