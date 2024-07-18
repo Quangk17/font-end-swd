@@ -41,7 +41,7 @@ const Nav = ({ isLoggedIn, onLogout, resetSearch }) => {
   };
 
   const handleLogoClick = () => {
-    resetSearch(); // Call the resetSearch function passed from App.js
+    resetSearch();
   };
 
   return (
@@ -60,9 +60,11 @@ const Nav = ({ isLoggedIn, onLogout, resetSearch }) => {
         <li>
           <Link to="/news">Tin tức</Link>
         </li>
-        <li>
-          <Link to="/booking">Đặt sân</Link>
-        </li>
+        {isLoggedIn && (
+          <li>
+            <Link to="/booking">Đặt sân</Link>
+          </li>
+        )}
       </ul>
       <ul className="right">
         {isLoggedIn ? (
