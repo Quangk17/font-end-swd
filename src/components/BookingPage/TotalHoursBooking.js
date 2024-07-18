@@ -57,9 +57,6 @@ const TotalHoursBooking = () => {
   return (
     <div className="total-hours-booking">
       <h2>Đặt Tổng Số Giờ</h2>
-      <div className="court-details">
-        <p>Sân đã chọn: {courtName}</p>
-      </div>
       <div className="input-section">
         <label>Nhập số giờ muốn đặt:</label>
         <input
