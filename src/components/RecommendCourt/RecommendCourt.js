@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./RecommendCourt.css";
 import court1Image from "../../assets/images/court1.webp";
 import court2Image from "../../assets/images/court2.jpg";
@@ -11,6 +12,7 @@ function RecommendCourt() {
   const [recommendedCourts, setRecommendedCourts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourts = async () => {
@@ -45,13 +47,21 @@ function RecommendCourt() {
     return <p>{error}</p>;
   }
 
+  const handleCourtClick = (id) => {
+    navigate(`/storedetail/${id}`);
+  };
+
   return (
     <section id="recommend">
       <div className="recommend-container">
         <h2>Đề Xuất</h2>
         <div className="recommend-grid">
           {recommendedCourts.map((court) => (
-            <div className="recommend-card" key={court.id}>
+            <div
+              className="recommend-card"
+              key={court.id}
+              onClick={() => handleCourtClick(court.id)}
+            >
               <img
                 src={court.image}
                 alt={court.name}
@@ -60,7 +70,7 @@ function RecommendCourt() {
               <div className="recommend-info">
                 <h3>{court.name}</h3>
                 <p>{court.address}</p>
-                <p>{court.hours}</p>
+                <p>7:00 AM - 10:00 PM</p>
               </div>
             </div>
           ))}

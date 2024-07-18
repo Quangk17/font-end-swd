@@ -19,12 +19,12 @@ const StoreDetail = () => {
         const selectedStore = stores.find((s) => s.id === parseInt(id));
         if (selectedStore) {
           setStore(selectedStore);
-          // Example mock booking data
+
           const mockBookingData = [
             { day: "Thứ 2", time: "7:00-7:30", status: "booked" },
             { day: "Thứ 5", time: "19:00-19:30", status: "booked" },
-          ]; // Replace with actual booking data from API
-          setBookingData(mockBookingData); // Set booking data from API response
+          ];
+          setBookingData(mockBookingData);
         } else {
           console.error(`Không tìm thấy cửa hàng với id ${id}`);
         }

@@ -46,6 +46,7 @@ function Search({ onSearch }) {
         )}`
       );
       const searchResults = response.data.data.map((item) => ({
+        id: item.id,
         court: item.name,
         address: item.address,
         status: item.status,
