@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./MonthlyBooking.css";
 
 const daysOfWeek = [
@@ -26,6 +26,7 @@ const bookingData = [
 const MonthlyBooking = () => {
   const [selectedSlots, setSelectedSlots] = useState([]);
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const handleSlotClick = (day, time) => {
     const slot = { day, time };
@@ -46,7 +47,11 @@ const MonthlyBooking = () => {
   };
 
   const handleConfirmBooking = () => {
-    navigate("/booking/payment", { state: { selectedSlots } });
+    navigate(`/booking/paymentmonthly/${id}`, {
+      state: {
+        selectedSlots,
+      },
+    });
   };
 
   return (
@@ -87,11 +92,7 @@ const MonthlyBooking = () => {
                     }`}
                     onClick={() => !isBooked && handleSlotClick(day, slot)}
                   >
-                    {!isBooked
-                      ? isSelected
-                        ? "100.000VNĐ"
-                        : "100.000VNĐ"
-                      : ""}
+                    {!isBooked ? (isSelected ? "50.000VNĐ" : "50.000VNĐ") : ""}
                   </td>
                 );
               })}

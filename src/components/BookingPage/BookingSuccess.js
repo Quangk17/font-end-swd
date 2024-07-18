@@ -16,7 +16,7 @@ const BookingSuccess = () => {
         <p>
           <strong>Loại hình đặt sân:</strong> {bookingType}
         </p>
-        {bookingType === "Đặt theo số giờ" && (
+        {bookingType === "total-hours" && (
           <p>
             <strong>Thời gian:</strong> {selectedTime}
           </p>

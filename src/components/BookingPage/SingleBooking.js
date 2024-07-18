@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./SingleBooking.css";
 
 const daysOfWeek = [
@@ -24,6 +24,27 @@ const bookingData = [
 ];
 
 const SingleBooking = () => {
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const handleSlotClick = (day, time) => {
+    const slot = { day, time };
+    if (
+      selectedSlot &&
+      selectedSlot.day === day &&
+      selectedSlot.time === time
+    ) {
+      setSelectedSlot(null);
+    } else {
+      setSelectedSlot(slot);
+    }
+  };
+
+  const handleConfirmBooking = () => {
+    navigate(`/booking/paymentsingle/${id}`, { state: { selectedSlot } });
+  };
+
   return (
     <div className="single-booking">
       <h2>Chọn Khung Giờ Đặt Sân</h2>
@@ -45,18 +66,24 @@ const SingleBooking = () => {
                   (b) => b.day === day && b.time === slot
                 );
                 const isBooked = booking && booking.status === "booked";
+                const isSelected =
+                  selectedSlot &&
+                  selectedSlot.day === day &&
+                  selectedSlot.time === slot;
+
                 return (
                   <td
                     key={day + slot}
-                    className={isBooked ? "booked" : "available"}
+                    className={`${
+                      isBooked
+                        ? "booked"
+                        : isSelected
+                        ? "selected"
+                        : "available"
+                    }`}
+                    onClick={() => !isBooked && handleSlotClick(day, slot)}
                   >
-                    {!isBooked ? (
-                      <Link to={`/booking/payment?day=${day}&time=${slot}`}>
-                        100.000VNĐ
-                      </Link>
-                    ) : (
-                      ""
-                    )}
+                    {!isBooked ? (isSelected ? "50.000VNĐ" : "50.000VNĐ") : ""}
                   </td>
                 );
               })}
@@ -64,6 +91,9 @@ const SingleBooking = () => {
           ))}
         </tbody>
       </table>
+      <button onClick={handleConfirmBooking} disabled={!selectedSlot}>
+        Xác nhận đặt sân
+      </button>
     </div>
   );
 };

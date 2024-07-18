@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Payment.css";
 
 const Payment = ({ bookingMode }) => {
   const [hours, setHours] = useState(1);
   const navigate = useNavigate();
+  const location = useLocation();
+  const court = location.state?.selectedCourt;
+  const courtName = court ? court.name : "ShuttleX Quận 1";
 
-  const courtName = "ShuttleX Quận 1";
   const bookingType =
-    bookingMode === "total_hours" ? "Đặt theo số giờ" : "Đặt theo khung giờ";
+    bookingMode === "total_hours"
+      ? "Đặt tổng số giờ chơi"
+      : "Đặt theo theo lịch";
   const selectedTime =
     bookingMode === "total_hours" ? `Số giờ: ${hours}` : "Khung giờ: 7:00-7:30";
-  const totalPrice = bookingMode === "total_hours" ? hours * 100000 : 100000;
+  const totalPrice = bookingMode === "total_hours" ? hours * 100000 : 50000;
 
   const handlePayment = () => {
     navigate("/booking/success", {
