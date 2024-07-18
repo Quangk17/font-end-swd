@@ -50,7 +50,7 @@ const PaymentMonthly = () => {
 
   const handlePayment = async () => {
     const bookingData = {
-      bookingName: "string",
+      bookingName: "Monthly",
       description: "string",
       bookingDate: new Date().toISOString(),
       price: totalPrice,

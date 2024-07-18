@@ -48,7 +48,7 @@ const PaymentSingle = () => {
 
   const handlePayment = async () => {
     const bookingData = {
-      bookingName: "string",
+      bookingName: "Single",
       description: "string",
       bookingDate: new Date().toISOString(),
       price: totalPrice,
