@@ -4,7 +4,14 @@ import "./BookingSuccess.css";
 
 const BookingSuccess = () => {
   const location = useLocation();
-  const { courtName, bookingType, selectedTime, totalPrice } = location.state;
+  const {
+    courtName,
+    bookingType,
+    selectedSlots,
+    selectedTime,
+    totalPrice,
+    totalHours,
+  } = location.state || {};
 
   return (
     <div className="booking-success">
@@ -16,13 +23,29 @@ const BookingSuccess = () => {
         <p>
           <strong>Loại hình đặt sân:</strong> {bookingType}
         </p>
-        {bookingType === "total-hours" && (
+        {bookingType === "Đặt 1 Lần" && (
           <p>
             <strong>Thời gian:</strong> {selectedTime}
           </p>
         )}
+        {bookingType === "Đặt Tổng Số Giờ" && (
+          <p>
+            <strong>Tổng số giờ:</strong> {totalHours} giờ
+          </p>
+        )}
+        {bookingType === "Đặt Lịch Tháng" && (
+          <p>
+            <strong>Thời gian:</strong>{" "}
+            {selectedSlots.map((slot, index) => (
+              <span key={index}>
+                {slot.day} {slot.time}
+                {index < selectedSlots.length - 1 && ", "}
+              </span>
+            ))}
+          </p>
+        )}
         <p>
-          <strong>Tổng giá tiền:</strong> {totalPrice.toLocaleString()} VND
+          <strong>Tổng giá tiền:</strong> {totalPrice.toLocaleString()} VNĐ
         </p>
       </div>
     </div>
