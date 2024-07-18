@@ -48,15 +48,46 @@ const PaymentMonthly = () => {
 
   const bookingType = "Đặt Lịch Tháng";
 
-  const handlePayment = () => {
-    navigate("/booking/success", {
-      state: {
-        courtName,
-        bookingType,
-        selectedSlots,
-        totalPrice,
+  const handlePayment = async () => {
+    const bookingData = {
+      bookingName: "string",
+      description: "string",
+      bookingDate: new Date().toISOString(),
+      price: totalPrice,
+      userID: 3,
+      bookingTypeID: 4,
+      bookingDetailParentCreateDTO: {
+        isActive: true,
+        date: new Date().toISOString(),
+        name: "string",
+        amountHour: 0,
+        bookingID: 0,
+        scheduleID: 14,
+        courtID: 6,
+        slotID: 3,
       },
-    });
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5236/api/Bookings/CreateBooking",
+        bookingData
+      );
+      if (response.data && response.data.success) {
+        navigate("/booking/success", {
+          state: {
+            courtName,
+            bookingType,
+            selectedSlots,
+            totalPrice,
+          },
+        });
+      } else {
+        console.error("Failed to create booking:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error creating booking:", error);
+    }
   };
 
   const goBack = () => {
